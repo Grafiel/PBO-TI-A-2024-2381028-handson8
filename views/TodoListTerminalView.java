@@ -13,9 +13,10 @@ public class TodoListTerminalView implements TodoListView{
         this.todoListService = todoListService;
     }
 
-    @Override
-    public void run() {
-        showMainMenu();
+    public String input(String info) {
+        System.out.print(info + " : ");
+        var data = scanner.nextLine();
+        return data;
     }
 
     public void showMainMenu() {
@@ -91,19 +92,19 @@ public class TodoListTerminalView implements TodoListView{
         }
     }
 
-    public String input(String info) {
-        System.out.print(info + " : ");
-        var data = scanner.nextLine();
-        return data;
-    }
     public void showTodoList() {
         System.out.println("TODO LIST");
-        TodoList[] todos = todoListService.getTodoList();
-        for (var i = 0; i < todos.length; i++) {
-            var todo = todos[i];
+        TodoList[] todosList = todoListService.getTodoList();
+        for (var i = 0; i < todosList.length; i++) {
+            var todo = todosList[i];
             if (todo != null) {
-                System.out.println((i + 1) + ". " + todo);
+                System.out.println((i + 1) + ". " + todo.getTodo());
             }
         }
+    }
+
+    @Override
+    public void run() {
+        showMainMenu();
     }
 }

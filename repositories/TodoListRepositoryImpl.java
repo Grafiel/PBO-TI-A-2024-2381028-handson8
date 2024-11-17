@@ -3,7 +3,7 @@ package repositories;
 import entities.TodoList;
 
 public class TodoListRepositoryImpl implements TodoListRepository {
-    public static TodoList[] todos = new TodoList[10];
+    public static TodoList[] todos = new TodoList[2];
 
 
     @Override
@@ -12,7 +12,7 @@ public class TodoListRepositoryImpl implements TodoListRepository {
     }
 
     @Override
-    public void add(TodoList todoList) {
+    public void add(final TodoList todoList) {
         resizeArrayIfFull();
 
         // add todo to array that has null element
@@ -24,7 +24,7 @@ public class TodoListRepositoryImpl implements TodoListRepository {
         }
     }
 
-    private static void resizeArrayIfFull() {
+    private void resizeArrayIfFull() {
         // cek whether todos is full
         Boolean isFull = true;
         isFull = isArrayFull(isFull);
@@ -35,7 +35,7 @@ public class TodoListRepositoryImpl implements TodoListRepository {
         }
     }
 
-    private static void resizeArrayToTwoTimesBigger() {
+    private void resizeArrayToTwoTimesBigger() {
         TodoList[] temp = todos;
         todos = new TodoList[todos.length * 2];
         for (int i = 0; i < temp.length; i++) {
@@ -43,7 +43,7 @@ public class TodoListRepositoryImpl implements TodoListRepository {
         }
     }
 
-    private static Boolean isArrayFull(Boolean isFull) {
+    private Boolean isArrayFull(Boolean isFull) {
         for (int i = 0; i < todos.length; i++) {
             if (todos[i] == null) {
                 isFull = false;

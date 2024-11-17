@@ -2,12 +2,11 @@ package services;
 
 import entities.TodoList;
 import repositories.TodoListRepository;
-import repositories.TodoListRepositoryImpl;
 
-public class TodoListServiceImpl implements TodoListService{
-    private final TodoListRepository todoListRepository;
+public class TodoListServiceImpl implements TodoListService {
+    private TodoListRepository todoListRepository;
 
-    public TodoListServiceImpl(final TodoListRepositoryImpl todoListRepository) {
+    public TodoListServiceImpl(TodoListRepository todoListRepository) {
         this.todoListRepository = todoListRepository;
     }
 
@@ -18,8 +17,8 @@ public class TodoListServiceImpl implements TodoListService{
 
     @Override
     public void addTodoList(final String todo) {
-        if (todo.isEmpty() || todo.isBlank()) {
-            System.out.println("Masukan todo dengan benar");
+        if(todo.isEmpty() || todo.isEmpty()) {
+            System.out.println("Masukkan todo dengan benar");
             return;
         }
 
@@ -30,11 +29,11 @@ public class TodoListServiceImpl implements TodoListService{
 
     @Override
     public Boolean removeTodoList(final Integer number) {
-        return removeTodoList(number);
+        return todoListRepository.remove(number);
     }
 
     @Override
-    public Boolean editTodoList(final Integer number, final String todo) {
+    public Boolean editTodoList(final Integer number, String todo) {
         TodoList todoList = new TodoList();
         todoList.setId(number);
         todoList.setTodo(todo);
